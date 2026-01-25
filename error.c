@@ -1,23 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.h                                            :+:      :+:    :+:   */
+/*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hnioo <hnioo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/25 12:11:33 by hnioo             #+#    #+#             */
-/*   Updated: 2026/01/25 12:37:36 by hnioo            ###   ########.fr       */
+/*   Created: 2026/01/25 12:28:58 by hnioo             #+#    #+#             */
+/*   Updated: 2026/01/25 12:31:20 by hnioo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PIPEX
-# define PIPEX
+#include "pipex.h"
 
-#include <unistd.h>
-#include "libft.h"
-
-#include "stdio.h"
-
-void	ft_err_exit(char *err_msg);
-
-#endif
+void	ft_err_exit(char *err_msg)
+{
+		write (2, "error\n", 6);
+		write (2, err_msg, ft_strlen(err_msg));
+		write (2, "\n", 1);
+		exit (1);
+}
