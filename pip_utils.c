@@ -6,7 +6,7 @@
 /*   By: hnioo <hnioo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/25 12:46:59 by hnioo             #+#    #+#             */
-/*   Updated: 2026/01/25 13:18:41 by hnioo            ###   ########.fr       */
+/*   Updated: 2026/01/25 13:19:23 by hnioo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,5 @@ static void	ft_pip_close_fd(int fd_in, int fd_out)
 void	ft_pip_renew(int pip[2])
 {
 	ft_pip_close_fd(pip[0], pip[1]);
-	if (pipe(pip) < 0)
-	{
-		ft_err_exit ("It doen't work\n");
-	}
+	pipe(pip);
 }
