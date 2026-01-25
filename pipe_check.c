@@ -1,24 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.h                                            :+:      :+:    :+:   */
+/*   pipe_check.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hnioo <hnioo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/25 12:11:33 by hnioo             #+#    #+#             */
-/*   Updated: 2026/01/25 12:42:01 by hnioo            ###   ########.fr       */
+/*   Created: 2026/01/25 12:38:32 by hnioo             #+#    #+#             */
+/*   Updated: 2026/01/25 12:40:53 by hnioo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PIPEX_H
-# define PIPEX_H
+#include "pipex.h"
 
-#include <unistd.h>
-#include "libft.h"
-
-#include "stdio.h"
-
-void	ft_err_exit(char *err_msg);
-int		ft_argc_check(int argc);
-
-#endif
+int	ft_argc_check(int argc)
+{
+	if (argc < 5)
+		ft_err_exit("Argv must be greater than 4.");
+	return (1);
+}
