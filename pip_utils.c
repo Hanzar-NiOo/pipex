@@ -1,25 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.h                                            :+:      :+:    :+:   */
+/*   pip_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hnioo <hnioo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/25 12:11:33 by hnioo             #+#    #+#             */
-/*   Updated: 2026/01/25 13:17:43 by hnioo            ###   ########.fr       */
+/*   Created: 2026/01/25 12:46:59 by hnioo             #+#    #+#             */
+/*   Updated: 2026/01/25 13:18:41 by hnioo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PIPEX_H
-# define PIPEX_H
+#include "pipex.h"
 
-#include <unistd.h>
-#include "libft.h"
+static void	ft_pip_close_fd(int fd_in, int fd_out)
+{
+	close(fd_in);
+	close(fd_out);
+}
 
-#include "stdio.h"
-
-void	ft_err_exit(char *err_msg);
-int		ft_argc_check(int argc);
-void	ft_pip_renew(int pip[2]);
-
-#endif
+void	ft_pip_renew(int pip[2])
+{
+	ft_pip_close_fd(pip[0], pip[1]);
+	if (pipe(pip) < 0)
+	{
+		ft_err_exit ("It doen't work\n");
+	}
+}
