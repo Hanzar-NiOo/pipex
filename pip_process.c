@@ -12,18 +12,97 @@
 
 #include "pipex.h"
 
-void	ft_pip_exec(char *cmd, int r_ end, int w_end, char **env)
+static char	**ft_get_paths(char **env)
 {
-	char	*args;
 	char	**paths;
+	char	*tmp;
+	int		idx;
 
-	dup2(r_end, STDIN_FILENO);
-	dup2(w_end, STDPUT_ERRNO);
-	// paths =
-	args = ft_split(cmd, " ");
+	idx = 0;
+	paths = NULL;
+	while (env[idx])
+	{
+		if (ft_strncmp("PATH=", env[idx], 5) == 0)
+		{
+			tmp = ft_strtrim(env[idx], "PATH=");
+			paths = ft_split(tmp, ':');
+			break ;
+		}
+		idx++;
+	}
+	if (!paths)
+		ft_err_exit ("env : paths not found");
+	return (paths);
 }
 
-void	ft_pip_f_process(char *cmd, int pip1[2], int pip[2], char **env)
+static char	*ft_get_exec(char *cmd, char **paths)
+{
+	char	*exec;
+	char	*tmp;
+	int		idx;
+
+	if (ft_strncmp(cmd, "./", 2) == 0)
+		return (ft_strdup(cmd));
+	idx = 0;
+	while (paths[idx])
+	{
+		tmp = ft_strjoin(paths[idx], "/");
+		exec = ft_strjoin(tmp, cmd);
+		if (access(ft_strjoin(tmp, cmd), F_OK) == 0)
+			return (exec);
+		idx++;
+	}
+	if (!exec)
+		ft_err_exit ("pipex : command not found");
+	return (NULL);
+}
+
+static void	ft_pip_exec(char *cmd, int fd_in, int fd_out, char **env)
+{
+	char	**args;
+	char	**paths;
+
+	args = NULL;
+	dup2(fd_in, STDIN_FILENO);
+	dup2(fd_out, STDOUT_FILENO);
+	paths = ft_get_paths(env);
+	args = ft_split(cmd, ' ');
+	args[0] = ft_get_exec(args[0], paths);
+	exec(args[0], args, env);
+
+	// // Test
+	// printf("%i\n", fd_in);
+	// printf("%i\n", fd_out);
+	// while (*paths)
+	// {
+	// 	printf("Test => %s\n", *paths);
+	// 	paths++;
+	// }
+	// while (*args)
+	// {
+	// 	printf("Test => %s\n", *args);
+	// 	args++;
+	// }
+	// printf ("%s\n", args[0]);
+}
+
+// In this process, pip1 read and pip2 write;
+void	ft_pip_f_process(char *cmd, int pip1[2], int pip2[2], char **env)
+{
+	int	Pid;
+
+	Pid = fork();
+	if (Pid < 0)
+		ft_err_exit("fork: Resource temporarily unavailable");
+	if (Pid == 1)
+	{
+		ft_pip_close_fd(pip1[1], pip2[0]);
+		ft_pip_exec(cmd, pip1[0], pip2[1], env);
+	}
+	ft_pip_renew(pip1);
+}
+
+void	ft_pip_s_process(char *cmd, int pip1[2], int pip2[2], char **env)
 {
 	int	Pid;
 
@@ -33,6 +112,7 @@ void	ft_pip_f_process(char *cmd, int pip1[2], int pip[2], char **env)
 	if (Pid == 1)
 	{
 		ft_pip_close_fd(pip1[0], pip2[1]);
-		ft_pip_exec(cmd, pip1[0], pip2[1], env);
+		ft_pip_exec(cmd, pip2[0], pip1[1], env);
 	}
+	ft_pip_renew(pip2);
 }
