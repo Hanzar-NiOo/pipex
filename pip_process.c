@@ -68,7 +68,7 @@ static void	ft_pip_exec(char *cmd, int fd_in, int fd_out, char **env)
 	paths = ft_get_paths(env);
 	args = ft_split(cmd, ' ');
 	args[0] = ft_get_exec(args[0], paths);
-	exec(args[0], args, env);
+	execve(args[0], args, env);
 
 	// // Test
 	// printf("%i\n", fd_in);

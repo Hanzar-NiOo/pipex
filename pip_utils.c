@@ -6,7 +6,7 @@
 /*   By: hnioo <hnioo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/25 12:46:59 by hnioo             #+#    #+#             */
-/*   Updated: 2026/01/27 22:50:08 by hnioo            ###   ########.fr       */
+/*   Updated: 2026/01/27 23:01:26 by hnioo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,10 @@ void	ft_pip_renew(int pip[2])
 	pipe(pip);
 }
 
-void	ft_pip_wait_children(int i)
+void	ft_pip_wait_children(int count)
 {
 	int	status;
 
-	while (i-- > 0)
+	while (count-- > 0)
 		wait(&status);
 }
