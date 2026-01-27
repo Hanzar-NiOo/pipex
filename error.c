@@ -6,7 +6,7 @@
 /*   By: hnioo <hnioo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/25 12:28:58 by hnioo             #+#    #+#             */
-/*   Updated: 2026/01/25 12:31:20 by hnioo            ###   ########.fr       */
+/*   Updated: 2026/01/27 23:37:51 by hnioo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void	ft_err_exit(char *err_msg)
 {
-		write (2, "error\n", 6);
-		write (2, err_msg, ft_strlen(err_msg));
-		write (2, "\n", 1);
-		exit (1);
+	write (2, "error\n", 6);
+	write (2, err_msg, ft_strlen(err_msg));
+	write (2, "\n", 1);
+	exit (1);
 }

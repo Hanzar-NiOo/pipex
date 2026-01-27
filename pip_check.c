@@ -6,7 +6,7 @@
 /*   By: hnioo <hnioo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/25 12:38:32 by hnioo             #+#    #+#             */
-/*   Updated: 2026/01/25 14:39:10 by hnioo            ###   ########.fr       */
+/*   Updated: 2026/01/27 23:38:08 by hnioo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,14 +43,14 @@ void	ft_read_here_doc(char *limiter, int pip[2])
 	}
 }
 
-int	ft_pip_check_here_doc(char **argv, int	pip[2])
+int	ft_pip_check_here_doc(char **argv, int pip[2])
 {
 	int	fd_tmp;
 
 	if (ft_strncmp("here_doc", argv[1], 9) == 0)
 	{
 		ft_read_here_doc(argv[2], pip);
-		close(pip[1]); // Write ends
+		close(pip[1]);
 		return (1);
 	}
 	fd_tmp = open(argv[1], O_RDONLY);

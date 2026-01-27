@@ -6,7 +6,7 @@
 /*   By: hnioo <hnioo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/25 12:06:57 by hnioo             #+#    #+#             */
-/*   Updated: 2026/01/27 23:02:11 by hnioo            ###   ########.fr       */
+/*   Updated: 2026/01/27 23:36:50 by hnioo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,6 @@ int	main(int argc, char **argv, char **env)
 	}
 	ft_pip_close_fd(pip1[1], pip2[1]);
 	ft_pip_wait_children(idx);
-	// ft_pip_write_result(argc, argv, pip1, pip2);
+	ft_pip_write_result(argc, argv, pip1, pip2);
 	return (0);
 }

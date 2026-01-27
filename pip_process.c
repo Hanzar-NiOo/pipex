@@ -69,32 +69,16 @@ static void	ft_pip_exec(char *cmd, int fd_in, int fd_out, char **env)
 	args = ft_split(cmd, ' ');
 	args[0] = ft_get_exec(args[0], paths);
 	execve(args[0], args, env);
-
-	// // Test
-	// printf("%i\n", fd_in);
-	// printf("%i\n", fd_out);
-	// while (*paths)
-	// {
-	// 	printf("Test => %s\n", *paths);
-	// 	paths++;
-	// }
-	// while (*args)
-	// {
-	// 	printf("Test => %s\n", *args);
-	// 	args++;
-	// }
-	// printf ("%s\n", args[0]);
 }
 
-// In this process, pip1 read and pip2 write;
 void	ft_pip_f_process(char *cmd, int pip1[2], int pip2[2], char **env)
 {
-	int	Pid;
+	int	pid;
 
-	Pid = fork();
-	if (Pid < 0)
+	pid = fork();
+	if (pid < 0)
 		ft_err_exit("fork: Resource temporarily unavailable");
-	if (Pid == 1)
+	if (pid == 1)
 	{
 		ft_pip_close_fd(pip1[1], pip2[0]);
 		ft_pip_exec(cmd, pip1[0], pip2[1], env);
@@ -104,12 +88,12 @@ void	ft_pip_f_process(char *cmd, int pip1[2], int pip2[2], char **env)
 
 void	ft_pip_s_process(char *cmd, int pip1[2], int pip2[2], char **env)
 {
-	int	Pid;
+	int	pid;
 
-	Pid = fork();
-	if (Pid < 0)
+	pid = fork();
+	if (pid < 0)
 		ft_err_exit("fork: Resource temporarily unavailable");
-	if (Pid == 1)
+	if (pid == 1)
 	{
 		ft_pip_close_fd(pip1[0], pip2[1]);
 		ft_pip_exec(cmd, pip2[0], pip1[1], env);
