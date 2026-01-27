@@ -50,6 +50,7 @@ int	ft_pip_check_here_doc(char **argv, int	pip[2])
 	if (ft_strncmp("here_doc", argv[1], 9) == 0)
 	{
 		ft_read_here_doc(argv[2], pip);
+		close(pip[1]); // Write ends
 		return (1);
 	}
 	fd_tmp = open(argv[1], O_RDONLY);

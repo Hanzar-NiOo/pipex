@@ -28,5 +28,6 @@ void	ft_pip_renew(int pip[2]);
 int		ft_pip_check_here_doc(char **argv, int	pip[2]);
 void	ft_read_here_doc(char *limiter, int pip[2]);
 char	*ft_get_next_line(int fd);
+void	ft_pip_f_process(char *cmd, int pip1[2], int pip[2], char **env);
 
 #endif
