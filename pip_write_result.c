@@ -46,7 +46,7 @@ void	ft_pip_write_result(int argc, char **argv, int pip1[2], int pip2[2])
 	if (ft_strncmp("here_doc", argv[1], 9))
 		here_d = 1;
 	if ((argc - here_d) % 2 == 1)
-		ft_pip_write(argv[argc -1], pip1[0], here_d);
-	else
 		ft_pip_write(argv[argc -1], pip2[0], here_d);
+	else
+		ft_pip_write(argv[argc -1], pip1[0], here_d);
 }

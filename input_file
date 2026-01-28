@@ -1,0 +1,6 @@
+cat << EOF > input_file
+hello world
+pipex is cool
+42 bangkok
+hello 42
+EOF

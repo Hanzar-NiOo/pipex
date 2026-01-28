@@ -21,6 +21,8 @@
 # include <sys/wait.h>
 # include "libft.h"
 
+# include <stdio.h>
+
 void	ft_err_exit(char *err_msg);
 int		ft_argc_check(int argc);
 void	ft_pip_close_fd(int fd_in, int fd_out);

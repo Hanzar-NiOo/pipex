@@ -23,9 +23,11 @@ int	main(int argc, char **argv, char **env)
 	pipe(pip1);
 	pipe(pip2);
 	here_d = ft_pip_check_here_doc(argv, pip2);
+	// printf("here_d = %i\n", here_d);
 	idx = 0;
 	while (idx < argc - here_d - 3)
 	{
+		// printf("Cmd = %s\n", argv[idx + here_d + 2]);
 		if (idx % 2 == 0)
 			ft_pip_f_process(argv[idx + here_d + 2], pip1, pip2, env);
 		else
