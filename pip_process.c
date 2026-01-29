@@ -80,6 +80,8 @@ static void	ft_pip_execve(char *cmd, int fd_in, int fd_out, char **env)
 	// printf("args[0] = %s\n", args[0]);
 	dup2(fd_in, STDIN_FILENO);
 	dup2(fd_out, STDOUT_FILENO);
+	// close(fd_in);
+	// close(fd_out);
 	execve(args[0], args, env);
 }
 
@@ -89,11 +91,11 @@ void	ft_pip_f_process(char *cmd, int pip1[2], int pip2[2], char **env)
 
 	pid = fork();
 	if (pid < 0)
-		ft_err_exit("fork: Resource temporarily unavailable");
+		ft_err_exit("fork : Resource temporarily unavailable");
 	// printf("pid = %i\n", pid);
 	if (pid == 0)
 	{
-		printf("I am child process\n");
+		// printf("I am child process\n");
 		// printf("Cmd = %s\n", cmd);
 		ft_pip_close_fd(pip1[1], pip2[0]);
 		ft_pip_execve(cmd, pip1[0], pip2[1], env);

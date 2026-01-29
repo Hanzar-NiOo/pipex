@@ -27,11 +27,16 @@ int	main(int argc, char **argv, char **env)
 	idx = 0;
 	while (idx < argc - here_d - 3)
 	{
-		// printf("Cmd = %s\n", argv[idx + here_d + 2]);
 		if (idx % 2 == 0)
+		{
+			printf("Cmd(First process) = %s\n", argv[idx + here_d + 2]);
 			ft_pip_f_process(argv[idx + here_d + 2], pip1, pip2, env);
+		}
 		else
+		{
+			printf("Cmd(Second process) = %s\n", argv[idx + here_d + 2]);
 			ft_pip_s_process(argv[idx + here_d + 2], pip1, pip2, env);
+		}
 		idx++;
 	}
 	ft_pip_close_fd(pip1[1], pip2[1]);
